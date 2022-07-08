@@ -1,15 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+require 'faker'
 
 puts "delete planets, bookings, users, spaceships..."
 
-User.destroy_all
 Booking.destroy_all
+User.destroy_all
 Planet.destroy_all
 Spaceship.destroy_all
 
@@ -25,29 +19,35 @@ puts "creating users"
 )
 @user.save
 puts "creating planets"
-@planet = Planet.create(
-  {
-    name: "Mars",
-    distance: 12000000
-  }
-)
-@planet.save
+8.times do
+  @planet = Planet.create(
+    {
+      name: Faker::Space.planet,
+      distance: rand(1_000_000..1_000_000_000)
+    }
+  )
+  @planet.save
+end
 puts "creating spaceships"
-@spaceship = Spaceship.create(
-  {
-    name: "Starship",
-    manufacturer: "Super Heavy"
-  }
-)
-@spaceship.save
+5.times do
+  @spaceship = Spaceship.create(
+    {
+      name: Faker::Space.launch_vehicle,
+      manufacturer: Faker::Space.company
+    }
+  )
+  @spaceship.save
+end
 puts "creating bookings"
-@booking = Booking.create(
-  {
-    user: User.first,
-    spaceship: Spaceship.first,
-    planet: Planet.first
-  }
-)
-@booking.save
+2.times do
+  @booking = Booking.create(
+    {
+      user: User.first,
+      spaceship: Spaceship.all.sample,
+      planet: Planet.all.sample
+    }
+  )
+  @booking.save
+end
 
 puts "seed finished"
