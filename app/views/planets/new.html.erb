@@ -1,0 +1,6 @@
+<h1>Create new planet listing</h1>
+<%= simple_form_for(@planet) do |p| %>
+  <%= p.input :name %>
+  <%= p.input :distance, hint: "enter the distance in km" %>
+  <%= p.submit %>
+<% end %>
