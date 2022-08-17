@@ -1,0 +1,8 @@
+<h1>All bookings</h1>
+<ul>
+  <% @bookings.each do |booking| %>
+    <li>
+      <%= "Trip to #{booking.planet.name} onboard the #{booking.spaceship.name}" %>
+    </li>
+  <% end %>
+</ul>

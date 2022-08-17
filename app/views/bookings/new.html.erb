@@ -1,0 +1,6 @@
+<h1>Book your trip</h1>
+<%= simple_form_for @booking do |b| %>
+  <%= b.input :spaceship, collection: @spaceships %>
+  <%= b.input :planet, collection: @planets %>
+  <%= b.submit %>
+<% end %>
