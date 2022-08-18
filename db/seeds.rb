@@ -1,4 +1,5 @@
 require 'faker'
+require 'open-uri'
 
 puts "delete planets, bookings, users, spaceships..."
 
@@ -8,6 +9,7 @@ Planet.destroy_all
 Spaceship.destroy_all
 
 puts "creating users"
+file = URI.open("https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1644365606/m65osr9oba87mizlpeov.jpg")
 @user = User.new
 @user = User.create(
   {
@@ -17,6 +19,7 @@ puts "creating users"
     password: "123456"
   }
 )
+@user.photo.attach(io: file, filename: "#{@user.first_name}.png", content_type: "image/png")
 @user.save
 puts "creating planets"
 8.times do
