@@ -1,3 +1,6 @@
 <h1><%= @planet.name %></h1>
+<% @planet.photos.each do |photo| %>
+  <%= cl_image_tag photo.key %>
+<% end %>
 <%= link_to "Back to planet index", planets_path %>
 <%= link_to "Book a trip to visit", new_booking_path %>

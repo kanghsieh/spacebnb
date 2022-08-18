@@ -23,6 +23,6 @@ class PlanetsController < ApplicationController
   private
 
   def planet_params
-    params.require(:planet).permit(:name, :distance)
+    params.require(:planet).permit(:name, :distance, photos: [])
   end
 end

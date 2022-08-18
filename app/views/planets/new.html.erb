@@ -2,5 +2,6 @@
 <%= simple_form_for(@planet) do |p| %>
   <%= p.input :name %>
   <%= p.input :distance, hint: "enter the distance in km" %>
+  <%= p.input :photos, as: :file, input_html: {multiple: true} %>
   <%= p.submit %>
 <% end %>

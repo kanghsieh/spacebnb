@@ -2,6 +2,7 @@
 <ul>
   <% @planets.each do |planet| %>
     <li>
+      <%= cl_image_tag planet.photos.first.key, height: 50, width: 50 if planet.photos.first %>
       <%= link_to "#{planet.name}", planet_path(planet) %>
     </li>
   <% end %>

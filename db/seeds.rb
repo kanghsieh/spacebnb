@@ -23,12 +23,14 @@ file = URI.open("https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_2
 @user.save
 puts "creating planets"
 8.times do
+  file = URI.open("https://i.pravatar.cc/100")
   @planet = Planet.create(
     {
       name: Faker::Space.planet,
       distance: rand(1_000_000..1_000_000_000)
     }
   )
+  @planet.photos.attach(io: file, filename: "#{@planet.name}.png", content_type: "image/png")
   @planet.save
 end
 puts "creating spaceships"
