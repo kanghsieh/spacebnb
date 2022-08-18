@@ -1,10 +1,10 @@
 class BookingsController < ApplicationController
+  before_action :set_booking, only: [:show, :edit, :update, :destroy]
   def index
     @bookings = Booking.all
   end
 
   def show
-    @booking = Booking.find(params[:id])
   end
 
   def new
@@ -22,18 +22,17 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to bookings_path
     else
-      flash[:error] = "Unable to create new booking."
+      # flash[:error] = "Unable to create new booking."
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-    @booking = Booking.find(params[:id])
     @spaceships = Spaceship.all
     @planets = Planet.all
   end
 
   def update
-    @booking = Booking.find(params[:id])
     @booking.update(
       user: current_user,
       spaceship: Spaceship.find(booking_params[:spaceship]),
@@ -42,12 +41,12 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to booking_path(@booking)
     else
-      flash[:error] = "Unable to update booking."
+      # flash[:error] = "Unable to update booking."
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @booking = Booking.find(params[:id])
     @booking.destroy
     redirect_to bookings_path, status: :see_other
   end
@@ -56,5 +55,9 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:spaceship, :planet, :user)
+  end
+
+  def set_booking
+    @booking = Booking.find(params[:id])
   end
 end
