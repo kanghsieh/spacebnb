@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :planets, only: [:index, :show, :new, :create]
   resources :spaceships, only: [:index, :show]
-  resources :bookings, only: [:index, :show, :new, :create, :update]
+  resources :bookings, only: [:index, :show, :new, :create, :edit, :update]
 end

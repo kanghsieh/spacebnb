@@ -1,0 +1,6 @@
+<h1>Update booking to <%= "#{@booking.planet.name} on #{@booking.spaceship.name}" %></h1>
+<%= simple_form_for @booking do |b| %>
+  <%= b.input :spaceship, collection: @spaceships, selected: @booking.spaceship.id %>
+  <%= b.input :planet, collection: @planets, selected: @booking.planet.id %>
+  <%= b.submit %>
+<% end %>
