@@ -29,7 +29,7 @@ puts "creating planets"
   @planet.save
 end
 puts "creating spaceships"
-5.times do
+3.times do
   @spaceship = Spaceship.create(
     {
       name: Faker::Space.launch_vehicle,
@@ -39,7 +39,7 @@ puts "creating spaceships"
   @spaceship.save
 end
 puts "creating bookings"
-2.times do
+8.times do
   @booking = Booking.create(
     {
       user: User.first,

@@ -3,7 +3,6 @@
   <% @bookings.each do |booking| %>
     <li>
       <%= link_to "Trip to #{booking.planet.name} onboard the #{booking.spaceship.name}", booking_path(booking) %>
-      <%# <%= "Trip to #{booking.planet.name} onboard the #{booking.spaceship.name}" %> %>
     </li>
   <% end %>
 </ul>
