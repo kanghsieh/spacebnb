@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :planets, only: [:index, :show, :new, :create]
   resources :spaceships, only: [:index, :show]
-  resources :bookings, only: [:index, :show, :new, :create, :edit, :update]
+  resources :bookings, except: :destroy
+  delete "bookings/:id", to: "bookings#destroy", as: "destroy_booking"
 end
