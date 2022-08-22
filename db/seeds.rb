@@ -44,7 +44,7 @@ puts "creating spaceships"
   @spaceship.save
 end
 puts "creating bookings"
-60.times do
+20.times do
   @booking = Booking.create(
     {
       user: User.first,
