@@ -1,16 +1,19 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
   def index
-    @bookings = Booking.where(user: current_user)
+    # @bookings = Booking.where(user: current_user)
+    @bookings = policy_scope(Booking)
   end
 
   def show
+    authorize @booking
   end
 
   def new
     @booking = Booking.new
     @spaceships = Spaceship.all
     @planets = Planet.all
+    authorize @booking
   end
 
   def create
@@ -19,6 +22,7 @@ class BookingsController < ApplicationController
       spaceship: Spaceship.find(booking_params[:spaceship]),
       planet: Planet.find(booking_params[:planet])
     )
+    authorize @booking
     if @booking.save
       redirect_to bookings_path
     else
@@ -28,11 +32,13 @@ class BookingsController < ApplicationController
   end
 
   def edit
+    authorize @booking
     @spaceships = Spaceship.all
     @planets = Planet.all
   end
 
   def update
+    authorize @booking
     @booking.update(
       user: current_user,
       spaceship: Spaceship.find(booking_params[:spaceship]),
@@ -47,6 +53,7 @@ class BookingsController < ApplicationController
   end
 
   def destroy
+    authorize @booking
     @booking.destroy
     redirect_to bookings_path, status: :see_other
   end
