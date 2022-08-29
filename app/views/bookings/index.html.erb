@@ -1,10 +1,14 @@
 <h1>All bookings</h1>
-<%= form_with url: bookings_path, method: :get do %>
-  <%= text_field_tag :query,
-    params[:query],
-    placeholder: "Find a booking" %>
-  <%= submit_tag "Search" %>
-<% end %>
+<div data-controller="search-bookings">
+  <div data-search-bookings-target="items"></div>
+  <%= form_with url: bookings_path, method: :get,
+    data: { search_bookings_target: "form" } do %>
+    <%= text_field_tag :query,
+      params[:query],
+      placeholder: "Find a booking" %>
+    <%= submit_tag "Search" %>
+  <% end %>
+</div>
 <ul>
   <% @bookings.each do |booking| %>
     <li>
