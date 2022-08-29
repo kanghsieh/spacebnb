@@ -1,18 +1,17 @@
 <h1>All bookings</h1>
 <div data-controller="search-bookings">
-  <div data-search-bookings-target="items"></div>
   <%= form_with url: bookings_path, method: :get,
-    data: { search_bookings_target: "form" } do %>
+    data: {
+      search_bookings_target: "form",
+      # action: "submit->search-bookings#send"
+    } do %>
     <%= text_field_tag :query,
       params[:query],
-      placeholder: "Find a booking" %>
-    <%= submit_tag "Search" %>
+      placeholder: "Find a booking",
+      data: {
+        search_bookings_target: "searchInput",
+        action: "keyup->search-bookings#update"
+      } %>
   <% end %>
+  <%= render 'searchlist', bookings: @bookings %>
 </div>
-<ul>
-  <% @bookings.each do |booking| %>
-    <li>
-      <%= link_to "Trip to #{booking.planet.name} onboard the #{booking.spaceship.name}", booking_path(booking) %>
-    </li>
-  <% end %>
-</ul>

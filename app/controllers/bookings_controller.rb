@@ -2,12 +2,16 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
   def index
     # @bookings = Booking.where(user: current_user)
-    @booking = Booking.new
     if params[:query].present?
-      sql_query = "planets.name @@ :query OR spaceships.name @@ :query"
+      sql_query = "planets.name ILIKE :query OR spaceships.name ILIKE :query"
       @bookings = policy_scope(Booking).joins(:planet).joins(:spaceship).where(sql_query, query: "%#{params[:query]}%")
     else
       @bookings = policy_scope(Booking)
+    end
+
+    respond_to do |format|
+      format.html
+      format.text { render partial: 'bookings/searchlist', formats: :html, locals: { bookings: @bookings } }
     end
   end
 

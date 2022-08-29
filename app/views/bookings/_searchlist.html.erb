@@ -1,0 +1,9 @@
+<div data-search-bookings-target="results">
+  <ul>
+    <% bookings.each do |booking| %>
+      <li>
+        <%= link_to "Trip to #{booking.planet.name} onboard the #{booking.spaceship.name}", booking_path(booking) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
