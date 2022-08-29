@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import NavbarController from "./navbar_controller.js"
 application.register("navbar", NavbarController)
+
+import SearchBookingsController from "./search_bookings_controller.js"
+application.register("search-bookings", SearchBookingsController)
