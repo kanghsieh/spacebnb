@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   resources :spaceships, only: [:index, :show]
   resources :bookings, except: :destroy
   delete "bookings/:id", to: "bookings#destroy", as: "destroy_booking"
+  resources :chatrooms, only: :show do
+    resources :messages, only: :create
+  end
 end
